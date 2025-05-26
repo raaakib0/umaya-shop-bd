@@ -18,4 +18,4 @@ Route::get('/login',function(){
     return view('login');
 });
 
-Route::view('/admin','admin');
+Route::view('/admin','admin-pages.admin');

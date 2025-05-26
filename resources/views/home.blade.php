@@ -19,7 +19,7 @@
                             <p><strong>Category:</strong> {{ $product['category'] }}</p>
                             <div class="d-flex justify-content-between">
                                 <p><strong>Brand:</strong> {{ $product['brand'] }}</p>
-                                <p><strong>Price:</strong> ${{ $product['price'] }}</p>
+                                <h6 class="text-success">Price: Tk {{ $product['price'] }}</h6>
                             </div>
                         </div>
                     </div>
