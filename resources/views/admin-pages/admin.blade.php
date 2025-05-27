@@ -7,12 +7,13 @@
 {{-- @include('admin-pages.side-layout') --}}
 
 @section('content')
-    @include('admin-pages.side-layout')
 
-@section('side-layout')
+    {{-- @include('admin-pages.side-layout') --}}
 
+@section('admin-content')
+<h1>Admin Page</h1>
     {{-- <h1>side layout</h1> --}}
 @endsection
 
-<h1>Admin Page</h1>
+
 @endsection
