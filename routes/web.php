@@ -19,3 +19,10 @@ Route::get('/login',function(){
 });
 
 Route::view('/admin','admin-pages.admin');
+
+
+Route::prefix('admin')->name('admin.')->group(function () {
+    Route::get('/dashboard', function () {
+        return view('admin-pages.dashboard');
+    })->name('dashboard');
+});
