@@ -11,8 +11,9 @@
             <div class="p-4 text-lg font-bold border-b">Admin Panel</div>
             <nav class="p-4 space-y-2">
                 <a href="{{ route('admin.dashboard') }}" class="block px-4 py-2 rounded hover:bg-gray-200">Dashboard</a>
-                <a href="{{ route('admin.dashboard') }}" class="block px-4 py-2 rounded hover:bg-gray-200">Users</a>
-                <a href="{{ route('admin.dashboard') }}" class="block px-4 py-2 rounded hover:bg-gray-200">Settings</a>
+                <a href="{{ route('admin.all-products') }}" class="block px-4 py-2 rounded hover:bg-gray-200">All Products</a>
+                <a href="{{ route('admin.add-products') }}" class="block px-4 py-2 rounded hover:bg-gray-200">Add Products</a>
+                <a href="{{ route('admin.edit-products') }}" class="block px-4 py-2 rounded hover:bg-gray-200">Edit Products</a>
             </nav>
         </aside>
 

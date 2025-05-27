@@ -10,10 +10,10 @@
   <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
-    <div class="collapse navbar-collapse text-success" id="navbarNavAltMarkup">
+    <div class=" navbar-collapse text-primary" id="navbarNavAltMarkup">
       <div class="navbar-nav">
         <a class="nav-link active" aria-current="page" href="/">Home</a>
-        <a class="nav-link active" href="/admin">Admin</a>
+        <a class="nav-link active" href="/admin/dashboard">Admin</a>
         <a class="" style="white-space: nowrap;" href="/login">Log In</a>
       </div>
     </div>
