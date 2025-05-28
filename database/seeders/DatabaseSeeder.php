@@ -19,5 +19,11 @@ class DatabaseSeeder extends Seeder
             'name' => 'Shoriful Islam',
             'email' => 'shoriful@gmail.com',
         ]);
+
+        $this->call([
+        ProductSeeder::class,
+    ]);
+    
     }
+
 }
