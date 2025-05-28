@@ -5,25 +5,36 @@
     <div class="row min-vh-100">
 
         <!-- Sidebar -->
-        <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-white sidebar collapse">
-            <div class="position-sticky pt-3">
-                <h5 class="px-3 py-2 border-bottom">Admin Panel</h5>
-                <ul class="nav flex-column px-3">
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ route('admin.dashboard') }}">Dashboard</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ route('admin.all-products') }}">All Products</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ route('admin.add-products') }}">Add Products</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ route('admin.edit-products') }}">Edit Products</a>
-                    </li>
-                </ul>
-            </div>
-        </nav>
+        <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse shadow-sm rounded-end">
+    <div class="position-sticky pt-4">
+        <h5 class="px-4 py-3 mb-0 border-bottom fw-bold text-primary">
+            <i class="bi bi-speedometer2 me-2"></i> Admin Panel
+        </h5>
+        <ul class="nav flex-column px-3 mt-3">
+            <li class="nav-item mb-1">
+                <a class="nav-link d-flex align-items-center gap-2 text-dark" href="{{ route('admin.dashboard') }}">
+                    <i class="bi bi-grid-fill"></i> Dashboard
+                </a>
+            </li>
+            <li class="nav-item mb-1">
+                <a class="nav-link d-flex align-items-center gap-2 text-dark" href="{{ route('admin.all-products') }}">
+                    <i class="bi bi-box-seam"></i> All Products
+                </a>
+            </li>
+            <li class="nav-item mb-1">
+                <a class="nav-link d-flex align-items-center gap-2 text-dark" href="{{ route('admin.add-products') }}">
+                    <i class="bi bi-plus-square-fill"></i> Add Products
+                </a>
+            </li>
+            <li class="nav-item mb-1">
+                <a class="nav-link d-flex align-items-center gap-2 text-dark" href="{{ route('admin.edit-products') }}">
+                    <i class="bi bi-pencil-square"></i> Edit Products
+                </a>
+            </li>
+        </ul>
+    </div>
+</nav>
+
 
         <!-- Main Content -->
         <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 py-4">
