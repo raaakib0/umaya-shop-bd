@@ -1,5 +1,5 @@
 
-@extends('shared-layout')
+@extends('layouts.shared-layout')
 
 
 

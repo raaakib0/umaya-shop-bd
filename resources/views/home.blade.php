@@ -1,4 +1,4 @@
-@extends('shared-layout')
+@extends('layouts.shared-layout')
 
 @section('title', 'Home')
 

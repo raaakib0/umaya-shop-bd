@@ -15,7 +15,7 @@ Route::get('/', function () {
 });
 
 Route::get('/login',function(){
-    return view('login');
+    return view('accounts.login');
 });
 
 Route::view('/admin','admin-pages.admin');
@@ -28,7 +28,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
 
     Route::get('/all-products', function () {
         return view('admin-pages.products-page.all-products');
-    })->name('dashall-productsboard');
+    })->name('all-products');
 
     Route::get('/add-products', function () {
         return view('admin-pages.products-page.add-products');

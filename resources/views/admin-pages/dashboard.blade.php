@@ -1,4 +1,4 @@
-@extends('admin-pages.side-layout')
+@extends('layouts.side-layout')
 
 @section('admin-content')
     <h1>admin dashboard</h1>
