@@ -4,13 +4,16 @@ use App\Http\Controllers\ProductsController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Storage;
 
-Route::get('/', function () {
+// Route::get('/', function () {
 
-    $json=Storage::get('data/products.json');
-    $products = json_decode($json,true);
-    return view('home', compact('products'));
+//     $json=Storage::get('data/products.json');
+//     $products = json_decode($json,true);
+//     return view('home', compact('products'));
 
-});
+// });
+
+Route::get('/', [ProductsController::class, 'index']);
+
 
 Route::get('/login',function(){
     return view('accounts.login');
@@ -21,9 +24,7 @@ Route::view('/admin','admin-pages.admin');
 
 Route::prefix('admin')->name('admin.')->group(function () {
    
-    Route::get('/dashboard', function () {
-        return view('admin-pages.dashboard');
-    })->name('dashboard');
+    Route::get('/dashboard', [ProductsController::class, 'dashboard'] )->name('dashboard');
 
     Route::get('/all-products', function () {
         return view('admin-pages.products-page.all-products');

@@ -7,12 +7,32 @@ use Illuminate\Http\Request;
 
 class ProductsController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+    // Display Products
     public function index()
     {
-        //
+
+        $products = Products::all();
+        return view('home', compact('products'));
+    }
+
+    // Admin Dashboard data show
+    public function dashboard()
+    {
+        $products = Products::all();
+
+        // Count products
+        $productsCount = $products->count();
+
+        // Dummy total sales (replace with real sales logic)
+        $totalSales = 12345.67;
+
+        // Dummy active users count (replace with real logic)
+        $activeUsers = 37;
+
+        // Products count grouped by category
+        $productsByCategory = $products->groupBy('category')->map->count()->toArray();
+
+        return view('admin-pages.dashboard', compact('products', 'productsCount', 'totalSales', 'activeUsers', 'productsByCategory'));
     }
 
     /**
