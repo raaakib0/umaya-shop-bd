@@ -15,6 +15,12 @@ class ProductsController extends Controller
         return view('home', compact('products'));
     }
 
+    public function allProducts()
+    {
+        $products = Products::all();
+        return view('admin-pages.products-page.all-products', compact('products'));
+    }
+
     // Admin Dashboard data show
     public function dashboard()
     {
@@ -34,6 +40,12 @@ class ProductsController extends Controller
 
         return view('admin-pages.dashboard', compact('products', 'productsCount', 'totalSales', 'activeUsers', 'productsByCategory'));
     }
+
+    public function deleteProducts()
+    {
+        return response('<h1>Delete Products</h1>');
+    }
+
 
     /**
      * Show the form for creating a new resource.
