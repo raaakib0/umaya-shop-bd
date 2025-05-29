@@ -1,11 +1,12 @@
-@extends('shared-layout')
+@extends('layouts.shared-layout')
 
 @section('title', 'Login')
 
 @section('content')
-    <div class="m-4">
-        <div class=" col-4 container-md container-fluid ">
-            <h1 class="d-flex justify-content-center">Log In</h1>
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-12 col-sm-8 col-md-6 col-lg-4">
+            <h1 class="text-center mb-4">Log In</h1>
             <form>
                 <div class="mb-3">
                     <label for="exampleInputEmail1" class="form-label">Email address</label>
@@ -20,10 +21,9 @@
                     <input type="checkbox" class="form-check-input" id="exampleCheck1">
                     <label class="form-check-label" for="exampleCheck1">Check me out</label>
                 </div>
-                <button type="submit" class="btn btn-primary">Submit</button>
+                <button type="submit" class="btn btn-primary w-100">Submit</button>
             </form>
         </div>
     </div>
-
-
+</div>
 @endsection
