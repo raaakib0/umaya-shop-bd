@@ -31,9 +31,10 @@
                     <td>{{ $product->category }}</td>
                     <td>{{ $product->brand }}</td>
                     <td>{{ $product->manufacturer }}</td>
+                    {{ dd($product) }}
                     <td>
-                        <a class="btn btn-sm btn-primary" href="{{ route('admin.edit-products', [ 'id'=> $product->id]) }}">Edit</a>
-                        <form class="d-inline" action="{{ route('admin.delete-products', ['id'=>$product->id]) }}" method="POST"
+                        <a class="btn btn-sm btn-primary" href="{{ route('admin.edit-products',  $product->id) }}">Edit</a>
+                        <form class="d-inline" action="{{ route('admin.delete-products',$product->id) }}" method="POST"
                             onsubmit="return confirm('Are you sure you want to delete this product?');">
                             @csrf
                             @method('DELETE')
