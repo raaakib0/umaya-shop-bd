@@ -1,6 +1,7 @@
 @extends('layouts.side-layout')
 
 @section('admin-content')
+    <h1>All Products</h1>
     <table class="table table-bordered table-hover">
         <thead class="thead-dark">
             <tr>
@@ -30,15 +31,16 @@
                     <td>{{ $product->category }}</td>
                     <td>{{ $product->brand }}</td>
                     <td>{{ $product->manufacturer }}</td>
-                    {{-- <td>
-                        <a class="btn btn-sm btn-primary" href="{{ route('/admin/edit-products', $product->id) }}">Edit</a>
-                        <form class="d-inline" action="{{ route('delete-products', $product->id) }}" method="POST"
+                    <td>
+                        <a class="btn btn-sm btn-primary" href="{{ route('admin.edit-products', [ 'id'=> $product->id]) }}">Edit</a>
+                        <form class="d-inline" action="{{ route('admin.delete-products', ['id'=>$product->id]) }}" method="POST"
                             onsubmit="return confirm('Are you sure you want to delete this product?');">
                             @csrf
                             @method('DELETE')
                             <button class="btn btn-sm btn-danger">Delete</button>
                         </form>
-                    </td> --}}
+                    </td>
+
                 </tr>
             @empty
                 <tr>

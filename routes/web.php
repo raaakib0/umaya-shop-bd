@@ -19,21 +19,17 @@ Route::get('/login', function () {
 // Route::view('/admin', 'admin-pages.admin');
 
 Route::prefix('admin')->name('admin.')->group(function () {
-
     Route::get('/dashboard', [ProductsController::class, 'dashboard'])->name('dashboard');
-
     Route::get('/all-products', [ProductsController::class, 'allProducts'])->name('all-products');
+    Route::get('/add-products', [ProductsController::class, 'create'])->name('add-products');
 
-    Route::get('/add-products', function () {
-        return view('admin-pages.products-page.add-products');
-    })->name('add-products');
+    // Correct dynamic route for editing
+    Route::get('/edit-products/{id}', [ProductsController::class, 'edit'])->name('edit-products');
 
-    Route::get('/edit-products', function () {
-        return view('admin-pages.products-page.edit-products');
-    })->name('edit-products');
-
-    Route::get('/delete-products', [ProductsController::class, 'deleteProducts'])->name('delete-products');
+    // Correct dynamic route for deleting
+    Route::delete('/delete-products/{id}', [ProductsController::class, 'destroy'])->name('delete-products');
 });
+
 
 // Resource routes for products (CRUD)
 Route::resource('products', ProductsController::class);

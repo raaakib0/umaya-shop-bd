@@ -41,10 +41,10 @@ class ProductsController extends Controller
         return view('admin-pages.dashboard', compact('products', 'productsCount', 'totalSales', 'activeUsers', 'productsByCategory'));
     }
 
-    public function deleteProducts()
-    {
-        return response('<h1>Delete Products</h1>');
-    }
+    // public function deleteProducts()
+    // {
+    //     return response('<h1>Delete Products</h1>');
+    // }
 
 
     /**
@@ -74,9 +74,10 @@ class ProductsController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Products $products)
+    public function edit($id)
     {
-        //
+        $products = Products::findofFail($id);
+        return view('admin-pages.products-page.edit-products',compact('products'));
     }
 
     /**
@@ -90,8 +91,10 @@ class ProductsController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Products $products)
+    public function destroy($id)
     {
-        //
+        $products = Products::findOrFail($id);
+        $products->delete();
+        return redirect()->route('admin.all-products')->with('success','Products Deleted Successfully.');
     }
 }
