@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Products;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class ProductsController extends Controller
 {
@@ -100,25 +101,31 @@ class ProductsController extends Controller
      * Update the specified resource in storage.
      */
     public function update(Request $request, $id)
-    {
-        $product = Products::findOrFail($id);
+{
+    $product = Products::findOrFail($id);
 
-        $validated = $request->validate([
-            'name' => 'required|string',
-            'price' => 'required|numeric',
-            'description' => 'required|string',
-            'image' => 'nullable|image|max:2048',
-        ]);
+    // Validate all relevant fields
+    $validated = $request->validate([
+        'name' => 'required|string|max:255',
+        'price' => 'required|numeric|min:0',
+        'description' => 'nullable|string',
+        'size' => 'nullable|string|max:100',
+        'category' => 'nullable|string|max:100',
+        'brand' => 'required|string|max:100',
+        'manufacturer' => 'nullable|string|max:100',
+        'image' => 'nullable|image|max:2048',
+    ]);
 
-        if ($request->hasFile('image')) {
+    // Handle image upload if provided
+     if ($request->hasFile('image')) {
             $imagePath = $request->file('image')->store('images', 'public');
             $validated['image'] = basename($imagePath);
         }
+    $product->update($validated);
 
-        $product->update($validated);
+    return redirect()->route('admin.all-products')->with('success', 'Product updated successfully.');
+}
 
-        return redirect()->route('admin.all-products')->with('success', 'Product updated successfully.');
-    }
 
     /**
      * Remove the specified resource from storage.

@@ -38,8 +38,8 @@
                         </div>
 
                         <div class="col-md-6 mb-3">
-                            <label for="category">📂 Category </label>
-                            <input type="text" name="category" class="form-control"  value="{{ old('category') }}">
+                            <label for="category">📂 Category</label>
+                            <input type="text" name="category" class="form-control" value="{{ old('category') }}">
                         </div>
 
                         <div class="col-md-6 mb-3">
@@ -50,6 +50,18 @@
                         <div class="col-md-6 mb-3">
                             <label for="manufacturer">🏭 Manufacturer</label>
                             <input type="text" name="manufacturer" class="form-control" value="{{ old('manufacturer') }}">
+                        </div>
+
+                        <!-- New Size Field -->
+                        <div class="col-md-6 mb-3">
+                            <label for="size">📏 Size</label>
+                            <input type="text" name="size" class="form-control" value="{{ old('size') }}">
+                        </div>
+
+                        <!-- New Description Field -->
+                        <div class="col-md-12 mb-3">
+                            <label for="description">📝 Description</label>
+                            <textarea name="description" class="form-control" rows="4">{{ old('description') }}</textarea>
                         </div>
                     </div>
 
