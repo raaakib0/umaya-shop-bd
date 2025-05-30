@@ -83,10 +83,26 @@ class ProductsController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Products $products)
-    {
-        //
+    public function update(Request $request, $id)
+{
+    $product = Products::findOrFail($id);
+
+    $validated = $request->validate([
+        'name' => 'required|string',
+        'price' => 'required|numeric',
+        'description' => 'required|string',
+        'image' => 'nullable|image|max:2048',
+    ]);
+
+    if ($request->hasFile('image')) {
+        $imagePath = $request->file('image')->store('images', 'public');
+        $validated['image'] = basename($imagePath);
     }
+
+    $product->update($validated);
+
+    return redirect()->route('admin.all-products')->with('success', 'Product updated successfully.');
+}
 
     /**
      * Remove the specified resource from storage.
