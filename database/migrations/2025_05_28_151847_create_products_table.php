@@ -18,8 +18,8 @@ return new class extends Migration
             $table->string('size')->nullable();
             $table->text('description')->nullable();
             $table->decimal('price', 10, 2);
-            $table->string('category');
-            $table->string('manufacturer');
+            $table->string('category')->nullable();
+            $table->string('manufacturer')->nullable();
             $table->string('brand');
             $table->timestamps();
         });

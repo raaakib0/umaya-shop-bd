@@ -61,10 +61,10 @@ class ProductsController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'name' => 'required|string| max255',
+            'name' => 'required|string|max:255',
             'price' => 'required|numeric',
-            'category' => 'required|string|max:255',
-            'brand' => 'nullable|string|max:255',
+            'category' => 'nullable|string|max:255',
+            'brand' => 'required|string|max:255',
             'manufacturer' => 'nullable|string|max:255',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
@@ -77,6 +77,7 @@ class ProductsController extends Controller
 
         return redirect()->route('admin.all-products')->with('success', 'Products Added Successfully');
     }
+
 
     /**
      * Display the specified resource.
