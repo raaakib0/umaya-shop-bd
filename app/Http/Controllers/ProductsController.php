@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Products;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Storage;
 
 class ProductsController extends Controller
@@ -117,10 +118,22 @@ class ProductsController extends Controller
     ]);
 
     // Handle image upload if provided
-     if ($request->hasFile('image')) {
-            $imagePath = $request->file('image')->store('images', 'public');
-            $validated['image'] = basename($imagePath);
+    if ($request->hasFile('image')) {
+        $image = $request->file('image');
+        $imageData = base64_encode(file_get_contents($image));
+
+        $response = Http::asForm()->post('https://api.imgbb.com/1/upload', [
+            'key' => env('IMGBB_API_KEY'),
+            'image' => $imageData,
+        ]);
+
+        if ($response->successful()) {
+            $validated['image'] = $response->json()['data']['url'];
+        } else {
+            return back()->with('error', 'Image upload to ImgBB failed.');
         }
+    }
+    
     $product->update($validated);
 
     return redirect()->route('admin.all-products')->with('success', 'Product updated successfully.');
