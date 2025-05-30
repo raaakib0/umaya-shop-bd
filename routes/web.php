@@ -16,7 +16,7 @@ Route::get('/login', function () {
     return view('accounts.login');
 });
 Route::get('/admin', function () {
-    return [ProductsController::class,'dashboard' ];
+    return [ProductsController::class, 'dashboard'];
 });
 
 // Route::view('/admin', 'admin-pages.admin');
@@ -28,7 +28,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
 
     // Correct dynamic route for editing
     Route::get('/edit-products/{id}', [ProductsController::class, 'edit'])->name('edit-products');
-Route::put('/update-products/{id}', [ProductsController::class, 'update'])->name('update-products');
+    Route::put('/update-products/{id}', [ProductsController::class, 'update'])->name('update-products');
 
     // Correct dynamic route for deleting
     Route::delete('/delete-products/{id}', [ProductsController::class, 'destroy'])->name('delete-products');

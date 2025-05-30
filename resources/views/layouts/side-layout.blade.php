@@ -26,11 +26,11 @@
                     <i class="bi bi-plus-square-fill"></i> Add Products
                 </a>
             </li>
-            <li class="nav-item mb-1">
+            {{-- <li class="nav-item mb-1">
                 <a class="nav-link d-flex align-items-center gap-2 text-dark" href="{{ route('admin.edit-products') }}">
                     <i class="bi bi-pencil-square"></i> Edit Products
                 </a>
-            </li>
+            </li> --}}
         </ul>
     </div>
 </nav>
