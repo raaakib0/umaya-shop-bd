@@ -1,7 +1,6 @@
 @extends('layouts.side-layout')
 
 @section('admin-content')
-
     <div class="d-flex justify-content-between align-items-center mb-4">
         <h2 class="mb-0">📦 All Products</h2>
     </div>
@@ -26,7 +25,7 @@
                     <td>{{ $product->name }}</td>
                     <td>
                         @if ($product->image)
-                            <img src="{{ asset('storage/' . $product->image) }}" width="60" class="rounded shadow-sm">
+                            <img src="{{ $product->image }}" alt="🚫 No Image" style="max-height: 60px;" class="rounded shadow-sm">
                         @else
                             <span class="text-muted">🚫 No Image</span>
                         @endif
