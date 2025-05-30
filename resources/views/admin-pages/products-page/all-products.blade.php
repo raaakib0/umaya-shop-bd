@@ -2,9 +2,9 @@
 
 @section('admin-content')
     <h1>All Products</h1>
-    <table class="table table-bordered table-hover">
-        <thead class="thead-dark">
-            <tr>
+    <table class="table table-bordered table-hover ">
+        <thead class="thead-dark ">
+            <tr class="text-center" >
                 <th>#</th>
                 <th>Name</th>
                 <th>Image</th>
@@ -15,7 +15,7 @@
                 <th>Actions</th>
             </tr>
         </thead>
-        <tbody>
+        <tbody class="text-center">
             @forelse($products as $index => $product)
                 <tr>
                     <td>{{ $index + 1 }}</td>
@@ -32,9 +32,10 @@
                     <td>{{ $product->brand }}</td>
                     <td>{{ $product->manufacturer }}</td>
                     <td>
-                        @if (isset($product))
-                            <a href="{{ route('admin.edit-products', ['id' => $product->id]) }}">Edit</a>
-                        @endif
+
+                        <a class="btn btn-sm btn-primary"
+                            href="{{ route('admin.edit-products', ['id' => $product->id]) }}">Edit</a>
+
                         <form class="d-inline" action="{{ route('admin.delete-products', ['id' => $product->id]) }}"
                             method="POST" onsubmit="return confirm('Are you sure you want to delete this product?');">
                             @csrf

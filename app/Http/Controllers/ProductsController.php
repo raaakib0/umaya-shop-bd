@@ -52,7 +52,7 @@ class ProductsController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin-pages.products-page.add-products');
     }
 
     /**
@@ -60,7 +60,22 @@ class ProductsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate([
+            'name' => 'required|string| max255',
+            'price' => 'required|numeric',
+            'category' => 'required|string|max:255',
+            'brand' => 'nullable|string|max:255',
+            'manufacturer' => 'nullable|string|max:255',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        ]);
+
+        if ($request->hasFile('image')) {
+            $validated['image'] = $request->file('image')->store('products', 'public');
+        }
+
+        \App\Models\Products::create($validated);
+
+        return redirect()->route('admin.all-products')->with('success', 'Products Added Successfully');
     }
 
     /**
@@ -77,32 +92,32 @@ class ProductsController extends Controller
     public function edit($id)
     {
         $products = Products::findofFail($id);
-        return view('admin-pages.products-page.edit-products',compact('products'));
+        return view('admin-pages.products-page.edit-products', compact('products'));
     }
 
     /**
      * Update the specified resource in storage.
      */
     public function update(Request $request, $id)
-{
-    $product = Products::findOrFail($id);
+    {
+        $product = Products::findOrFail($id);
 
-    $validated = $request->validate([
-        'name' => 'required|string',
-        'price' => 'required|numeric',
-        'description' => 'required|string',
-        'image' => 'nullable|image|max:2048',
-    ]);
+        $validated = $request->validate([
+            'name' => 'required|string',
+            'price' => 'required|numeric',
+            'description' => 'required|string',
+            'image' => 'nullable|image|max:2048',
+        ]);
 
-    if ($request->hasFile('image')) {
-        $imagePath = $request->file('image')->store('images', 'public');
-        $validated['image'] = basename($imagePath);
+        if ($request->hasFile('image')) {
+            $imagePath = $request->file('image')->store('images', 'public');
+            $validated['image'] = basename($imagePath);
+        }
+
+        $product->update($validated);
+
+        return redirect()->route('admin.all-products')->with('success', 'Product updated successfully.');
     }
-
-    $product->update($validated);
-
-    return redirect()->route('admin.all-products')->with('success', 'Product updated successfully.');
-}
 
     /**
      * Remove the specified resource from storage.
@@ -111,6 +126,6 @@ class ProductsController extends Controller
     {
         $products = Products::findOrFail($id);
         $products->delete();
-        return redirect()->route('admin.all-products')->with('success','Products Deleted Successfully.');
+        return redirect()->route('admin.all-products')->with('success', 'Products Deleted Successfully.');
     }
 }
