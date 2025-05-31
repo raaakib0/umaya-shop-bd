@@ -6,7 +6,7 @@
       <ul class="list-inline mb-0">
         <li class="list-inline-item"><a href="#" class="text-white text-decoration-none">Privacy Policy</a></li>
         <li class="list-inline-item"><a href="#" class="text-white text-decoration-none">Terms of Service</a></li>
-        <li class="list-inline-item"><a href="#" class="text-white text-decoration-none">Contact Us</a></li>
+        <li class="list-inline-item"><a href="/contact" class="text-white text-decoration-none">Contact Us</a></li>
       </ul>
     </div>
   </div>
