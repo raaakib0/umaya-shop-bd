@@ -1,8 +1,10 @@
 <?php
+
 use App\Http\Controllers\ProductsController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\OrderController;
 
 
 Route::get('/', [ProductsController::class, 'index']);
@@ -23,9 +25,17 @@ Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 Route::get('/register', [RegisterController::class, 'showRegistrationForm'])->name('register');
 Route::post('/register', [RegisterController::class, 'register']);
 
+Route::get('/order', [OrderController::class, 'showForm'])->name('order.form');
+Route::post('/order', [OrderController::class, 'store'])->name('order.submit');
+Route::get('/order/thankyou', [OrderController::class, 'thankYou'])->name('order.thankyou');
+
+Route::get('/product/{id}/order', [OrderController::class, 'showOrderForm'])->name('product.order.form');
+Route::post('/product/{id}/order', [OrderController::class, 'submitOrder'])->name('product.order.submit');
+
+
 Route::prefix('admin')
     ->name('admin.')
-    ->middleware(['auth', 'admin']) // ← Restrict to logged-in admins
+    // ->middleware(['auth', 'admin']) // ← Restrict to logged-in admins
     ->group(function () {
         Route::get('/dashboard', [ProductsController::class, 'dashboard'])->name('dashboard');
         Route::get('/all-products', [ProductsController::class, 'allProducts'])->name('all-products');
@@ -37,4 +47,8 @@ Route::prefix('admin')
         Route::put('/update-products/{id}', [ProductsController::class, 'update'])->name('update-products');
 
         Route::delete('/delete-products/{id}', [ProductsController::class, 'destroy'])->name('delete-products');
+
+        Route::get('/orders', [OrderController::class, 'adminOrders'])->name('orders');
+        Route::put('/orders/{order}', [OrderController::class, 'update'])->name('orders.update');
+
     });
