@@ -3,7 +3,8 @@
         <div class="container">
             <!-- Brand -->
             <a class="navbar-brand d-flex align-items-center" href="/">
-                <img src="{{ asset('asstes/umaya-shop-bd.png') }}" alt="Umaya Shop Logo" width="45" height="45" class="me-2">
+                <img src="{{ asset('asstes/umaya-shop-bd.png') }}" alt="Umaya Shop Logo" width="45" height="45"
+                    class="me-2">
                 <strong>UMAYA SHOP BD</strong>
             </a>
 
@@ -19,12 +20,26 @@
                     <li class="nav-item">
                         <a class="nav-link {{ request()->is('/') ? 'active' : '' }}" href="/">Home</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link {{ request()->is('admin/dashboard') ? 'active' : '' }}" href="/admin/dashboard">Admin</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link {{ request()->is('login') ? 'active' : '' }}" href="/login">Log In</a>
-                    </li>
+
+                    @auth
+                        @if (auth()->user()->role === 'is_admin') {{-- or use is_admin --}}
+                            <li class="nav-item">
+                                <a class="nav-link {{ request()->is('admin/dashboard') ? 'active' : '' }}"
+                                    href="{{ route('admin.dashboard') }}">Admin</a>
+                            </li>
+                        @endif
+
+                        <li class="nav-item">
+                            <form action="{{ route('logout') }}" method="POST" class="d-inline">
+                                @csrf
+                                <button type="submit" class="nav-link btn btn-link" style="padding: 0;">Logout</button>
+                            </form>
+                        </li>
+                    @else
+                        <li class="nav-item">
+                            <a class="nav-link {{ request()->is('login') ? 'active' : '' }}" href="{{ route('login') }}">Log In</a>
+                        </li>
+                    @endauth
                 </ul>
             </div>
         </div>
