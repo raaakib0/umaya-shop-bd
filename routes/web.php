@@ -8,6 +8,7 @@ use App\Http\Controllers\OrderController;
 
 
 Route::get('/', [ProductsController::class, 'index']);
+Route::get('/product/{id}', [ProductsController::class, 'show'])->name('product.show');
 
 // Display Contact Page
 Route::get('/contact', function () {

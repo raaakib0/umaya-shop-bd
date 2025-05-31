@@ -15,6 +15,13 @@ class ProductsController extends Controller
         return view('home', compact('products'));
     }
 
+public function show($id)
+{
+    $product = Products::findOrFail($id);
+    return view('product-details', compact('product'));
+}
+
+
     // Admin dashboard
     public function dashboard()
     {
