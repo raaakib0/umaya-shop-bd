@@ -7,6 +7,14 @@ use App\Http\Controllers\Auth\RegisterController;
 
 Route::get('/', [ProductsController::class, 'index']);
 
+// Display Contact Page
+Route::get('/contact', function () {
+    return view('contact');
+})->name('contact');
+
+// Handle form submission
+Route::post('/contact', [\App\Http\Controllers\ContactController::class, 'send'])->name('contact.send');
+
 
 Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
 Route::post('/login', [LoginController::class, 'login']);
