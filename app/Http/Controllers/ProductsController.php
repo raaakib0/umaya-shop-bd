@@ -3,52 +3,54 @@
 namespace App\Http\Controllers;
 
 use App\Models\Products;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Http;
 
 class ProductsController extends Controller
 {
-    // Display homepage with all products
+    // Show homepage with all products
     public function index()
     {
         $products = Products::all();
         return view('home', compact('products'));
     }
 
-public function show($id)
-{
-    $product = Products::findOrFail($id);
-    return view('product-details', compact('product'));
-}
-
+    // Show product details
+    public function show($id)
+    {
+        $product = Products::findOrFail($id);
+        return view('product-details', compact('product'));
+    }
 
     // Admin dashboard
     public function dashboard()
     {
         $products = Products::all();
         $productsCount = $products->count();
-        $totalSales = 12345.67; // Dummy data
-        $activeUsers = 37;      // Dummy data
+        $totalSales = 12345.67; // Static/demo data
+        $activeUsers = 37;      // Static/demo data
 
         $productsByCategory = $products->groupBy('category')->map->count()->toArray();
 
         return view('admin-pages.dashboard', compact('products', 'productsCount', 'totalSales', 'activeUsers', 'productsByCategory'));
     }
 
-    // Show all products (admin view)
+    // Show all products (admin)
     public function allProducts()
     {
         $products = Products::all();
         return view('admin-pages.products-page.all-products', compact('products'));
     }
 
-    // Show create product form
+    // Show form to create product
     public function create()
     {
         return view('admin-pages.products-page.add-products');
     }
 
-    // Store a new product
+    // Store new product
     public function store(Request $request)
     {
         $validated = $request->validate([
@@ -62,7 +64,7 @@ public function show($id)
             'image' => 'nullable|image|max:2048',
         ]);
 
-        // Upload to ImgBB
+        // Upload to ImgBB if image exists
         if ($request->hasFile('image')) {
             $imageData = base64_encode(file_get_contents($request->file('image')));
             $response = Http::asForm()->post('https://api.imgbb.com/1/upload', [
@@ -105,7 +107,6 @@ public function show($id)
             'image' => 'nullable|image|max:2048',
         ]);
 
-        // ImgBB image upload
         if ($request->hasFile('image')) {
             $imageData = base64_encode(file_get_contents($request->file('image')));
             $response = Http::asForm()->post('https://api.imgbb.com/1/upload', [
@@ -132,5 +133,25 @@ public function show($id)
         $product->delete();
 
         return redirect()->route('admin.all-products')->with('success', 'Product deleted successfully.');
+    }
+
+    // Show all users
+    public function indexUsers()
+    {
+        $users = User::all();
+        return view('admin.users', compact('users'));
+    }
+
+    // Toggle admin status
+    public function toggleAdmin(User $user)
+    {
+        if (Auth::id() === $user->id) {
+            return back()->with('error', 'You cannot change your own admin status.');
+        }
+
+        $user->is_admin = !$user->is_admin;
+        $user->save();
+
+        return back()->with('success', 'User admin status updated successfully.');
     }
 }

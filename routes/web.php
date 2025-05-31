@@ -36,7 +36,7 @@ Route::post('/product/{id}/order', [OrderController::class, 'submitOrder'])->nam
 
 Route::prefix('admin')
     ->name('admin.')
-    // ->middleware(['auth', 'admin']) // ← Restrict to logged-in admins
+    ->middleware(['auth', 'admin']) // ← Restrict to logged-in admins
     ->group(function () {
         Route::get('/dashboard', [ProductsController::class, 'dashboard'])->name('dashboard');
         Route::get('/all-products', [ProductsController::class, 'allProducts'])->name('all-products');
@@ -52,4 +52,6 @@ Route::prefix('admin')
         Route::get('/orders', [OrderController::class, 'adminOrders'])->name('orders');
         Route::put('/orders/{order}', [OrderController::class, 'update'])->name('orders.update');
 
+        Route::get('/users', [ProductsController::class, 'indexUsers'])->name('users.index');
+        Route::patch('/users/{user}/toggle-admin', [ProductsController::class, 'toggleAdmin'])->name('users.toggle');
     });

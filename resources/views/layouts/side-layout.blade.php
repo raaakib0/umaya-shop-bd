@@ -36,6 +36,13 @@
                                 <i class="bi bi-card-checklist"></i> 📦 View Orders
                             </a>
                         </li>
+                        <li class="nav-item mb-1">
+                            <a class="nav-link d-flex align-items-center gap-2 {{ request()->routeIs('admin.users.index') ? 'active text-primary fw-semibold' : 'text-dark' }}"
+                                href="{{ route('admin.users.index') }}">
+                                <i class="bi bi-people-fill"></i> 👥 Manage Users
+                            </a>
+                        </li>
+
 
                     </ul>
                 </div>
