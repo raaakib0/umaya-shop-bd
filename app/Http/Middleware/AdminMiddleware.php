@@ -15,4 +15,3 @@ class AdminMiddleware
         return redirect('/login')->with('error', 'Access denied. Admins only.');
     }
 }
-

@@ -20,9 +20,14 @@
                     <li class="nav-item">
                         <a class="nav-link {{ request()->is('/') ? 'active' : '' }}" href="/">Home</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link {{ request()->is('/') ? 'active' : '' }}" href="/contact">Contact
+                            Us</a>
+                    </li>
 
                     @auth
-                        @if (auth()->user()->role === 'is_admin') {{-- or use is_admin --}}
+                        @if (auth()->user()->is_admin)
+                            {{-- or use is_admin --}}
                             <li class="nav-item">
                                 <a class="nav-link {{ request()->is('admin/dashboard') ? 'active' : '' }}"
                                     href="{{ route('admin.dashboard') }}">Admin</a>
@@ -32,16 +37,18 @@
                         <li class="nav-item">
                             <form action="{{ route('logout') }}" method="POST" class="d-inline">
                                 @csrf
-                                <button type="submit" class="nav-link btn btn-link" style="padding: 0;">Logout</button>
+                                <button type="submit" class="nav-link btn btn-link p-0">Logout</button>
                             </form>
                         </li>
                     @else
                         <li class="nav-item">
-                            <a class="nav-link {{ request()->is('login') ? 'active' : '' }}" href="{{ route('login') }}">Log In</a>
+                            <a class="nav-link {{ request()->is('login') ? 'active' : '' }}" href="{{ route('login') }}">Log
+                                In</a>
                         </li>
                     @endauth
                 </ul>
             </div>
+
         </div>
     </nav>
 </header>
