@@ -52,6 +52,8 @@ Route::prefix('admin')
 
         Route::get('/orders', [OrderController::class, 'adminOrders'])->name('orders');
         Route::put('/orders/{order}', [OrderController::class, 'update'])->name('orders.update');
+        Route::patch('/orders/{id}', [OrderController::class, 'update'])->name('status.update');
+
 
         Route::get('/users', [ProductsController::class, 'indexUsers'])->name('users.index');
         Route::patch('/users/{user}/toggle-admin', [ProductsController::class, 'toggleAdmin'])->name('users.toggle');

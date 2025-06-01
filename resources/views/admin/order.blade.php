@@ -24,7 +24,7 @@
 
                     {{-- Optional: Mark as complete button --}}
                     @if($order->status === 'pending')
-                        <form method="POST" action="{{ route('admin.orders.update', $order->id) }}">
+                        <form method="POST" action="{{ route('admin.status.update', $order->id) }}">
                             @csrf
                             @method('PATCH')
                             <button type="submit" class="btn btn-sm btn-outline-success">
