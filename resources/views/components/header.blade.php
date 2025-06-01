@@ -30,7 +30,7 @@
                             {{-- or use is_admin --}}
                             <li class="nav-item">
                                 <a class="nav-link {{ request()->is('admin/dashboard') ? 'active' : '' }}"
-                                    href="{{ route('admin.dashboard') }}">Admin</a>
+                                    href="{{ route('admin.dashboard') }}">Admin Panel</a>
                             </li>
                         @endif
 

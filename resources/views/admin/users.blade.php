@@ -5,17 +5,17 @@
     <h2 class="mb-4">👥 All Users</h2>
 
     <table class="table table-bordered table-hover align-middle">
-        <thead class="table-dark">
+        <thead class="table-dark text-center">
             <tr>
                 <th>#</th>
                 <th>Name</th>
                 <th>Email</th>
                 <th>Admin?</th>
                 <th>Joined</th>
-                <th class="text-center">Action</th>
+                <th>Action</th>
             </tr>
         </thead>
-        <tbody>
+        <tbody class="text-center">
             @foreach ($users as $user)
                 <tr>
                     <td>{{ $loop->iteration }}</td>

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ContactController;
 use App\Http\Controllers\ProductsController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\LoginController;
@@ -12,7 +13,7 @@ Route::get('/product/{id}', [ProductsController::class, 'show'])->name('product.
 
 // Display Contact Page
 Route::get('/contact', function () {
-    return view('contact');
+    return view ('contact');
 })->name('contact');
 
 // Handle form submission
@@ -36,7 +37,7 @@ Route::post('/product/{id}/order', [OrderController::class, 'submitOrder'])->nam
 
 Route::prefix('admin')
     ->name('admin.')
-    ->middleware(['auth', 'admin']) // ← Restrict to logged-in admins
+    // ->middleware(['auth', 'admin']) // ← Restrict to logged-in admins
     ->group(function () {
         Route::get('/dashboard', [ProductsController::class, 'dashboard'])->name('dashboard');
         Route::get('/all-products', [ProductsController::class, 'allProducts'])->name('all-products');
@@ -54,4 +55,8 @@ Route::prefix('admin')
 
         Route::get('/users', [ProductsController::class, 'indexUsers'])->name('users.index');
         Route::patch('/users/{user}/toggle-admin', [ProductsController::class, 'toggleAdmin'])->name('users.toggle');
+
+        Route::get('/contact-message', [ContactController::class, 'index'])->name('contact-message.index');
+        
+
     });
