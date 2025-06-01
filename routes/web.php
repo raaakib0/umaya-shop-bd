@@ -17,7 +17,7 @@ Route::get('/contact', function () {
 })->name('contact');
 
 // Handle form submission
-Route::post('/contact', [\App\Http\Controllers\ContactController::class, 'send'])->name('contact.send');
+Route::post('/contact', [ContactController::class, 'send'])->name('contact.send');
 
 
 Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
@@ -37,7 +37,7 @@ Route::post('/product/{id}/order', [OrderController::class, 'submitOrder'])->nam
 
 Route::prefix('admin')
     ->name('admin.')
-    // ->middleware(['auth', 'admin']) // ← Restrict to logged-in admins
+    ->middleware(['auth']) // ← Restrict to logged-in admins
     ->group(function () {
         Route::get('/dashboard', [ProductsController::class, 'dashboard'])->name('dashboard');
         Route::get('/all-products', [ProductsController::class, 'allProducts'])->name('all-products');
@@ -51,7 +51,7 @@ Route::prefix('admin')
         Route::delete('/delete-products/{id}', [ProductsController::class, 'destroy'])->name('delete-products');
 
         Route::get('/orders', [OrderController::class, 'adminOrders'])->name('orders');
-        Route::put('/orders/{order}', [OrderController::class, 'update'])->name('orders.update');
+        // Route::put('/orders/{order}', [OrderController::class, 'update'])->name('orders.update');
         Route::patch('/orders/{id}', [OrderController::class, 'update'])->name('status.update');
 
 

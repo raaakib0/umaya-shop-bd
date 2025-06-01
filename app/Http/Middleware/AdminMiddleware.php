@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\Middleware;
 
 use Closure;
@@ -12,7 +13,7 @@ class AdminMiddleware
             return $next($request);
         }
 
-        // return redirect('/login')->with('error', 'Access denied. Admins only.');
-         abort(403, 'Unauthorized');
+        return redirect('/login')->with('error', 'Access denied. Admins only.');
+        //  abort(403, 'Unauthorized');
     }
 }
