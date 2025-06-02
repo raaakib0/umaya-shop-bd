@@ -3,6 +3,7 @@
 @section('title', $product->name)
 
 @section('content')
+@include('components.home-slider')
 <div class="container mt-5">
     <div class="row">
         <div class="col-md-6">

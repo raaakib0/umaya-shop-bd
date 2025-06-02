@@ -3,6 +3,7 @@
 @section('title', 'Order Now')
 
 @section('content')
+@include('components.home-slider')
 <div class="container mt-5">
     <h3>🛒 Order: {{ $product->name }}</h3>
     <div class="card p-4">
