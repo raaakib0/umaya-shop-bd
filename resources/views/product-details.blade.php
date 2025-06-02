@@ -18,7 +18,7 @@
                 <span class="taka-symbol">৳</span> {{ number_format($product->price, 2) }}
             </h4>
 
-            <a href="{{ route('product.order.form', $product->id) }}" class="btn btn-primary mt-3">
+            <a href="{{ route('product.order.form', $product->id) }}" class="btn btn-primary mt-3 mb-5">
                 🛒 Order Now
             </a>
         </div>

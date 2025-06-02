@@ -3,7 +3,6 @@
 @section('title', 'Home')
 
 @section('content')
-@include('components.home-slider')
     <div class="container mt-5">
         <h2>🩺 Surgical Products</h2>
         <div class="row">

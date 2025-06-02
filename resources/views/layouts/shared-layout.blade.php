@@ -12,6 +12,7 @@
 <body>
 
     @include('components.header')
+    @include('components.home-slider')
 
     @yield('content')
 
