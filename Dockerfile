@@ -32,8 +32,8 @@ RUN composer install --no-dev --optimize-autoloader
 RUN chown -R www-data:www-data /var/www \
     && chmod -R 755 /var/www/storage
 
-# Expose port 8000
-EXPOSE 8000
+# Expose the port Render will bind to (Render injects the PORT env var)
+EXPOSE 8080
 
-# Run Laravel's built-in server
-CMD php artisan config:cache && php artisan serve --host=0.0.0.0 --port=8000
+# Run Laravel's built-in development server using the dynamic Render PORT
+CMD php artisan config:cache && php artisan serve --host=0.0.0.0 --port=${PORT}
