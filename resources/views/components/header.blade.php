@@ -3,13 +3,13 @@
         <div class="container">
             <!-- Brand -->
             <a class="navbar-brand d-flex align-items-center" href="/">
-                <img src="{{ asset('asstes/umaya-shop-bd.png') }}" alt="Umaya Shop Logo" width="45" height="45"
-                    class="me-2">
+                <img class="me-2" src="{{ asset('asstes/umaya-shop-bd.png') }}" alt="Umaya Shop Logo" width="45"
+                    height="45">
                 <strong>UMAYA SHOP BD</strong>
             </a>
 
             <!-- Toggler -->
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+            <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarNav" type="button"
                 aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -34,10 +34,10 @@
                             </li>
                         @endif
 
-                        <li class="nav-item">
-                            <form action="{{ route('logout') }}" method="POST" class="d-inline">
+                        <li class="nav-item d-flex align-items-center">
+                            <form class="d-inline d-flex align-items-center" action="{{ route('logout') }}" method="POST">
                                 @csrf
-                                <button type="submit" class="nav-link btn btn-link p-0">Logout</button>
+                                <button class="nav-link btn btn-link p-0" type="submit">Logout</button>
                             </form>
                         </li>
                     @else
