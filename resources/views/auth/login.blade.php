@@ -48,8 +48,14 @@
 
                     <button type="submit" class="btn btn-primary w-100">Login</button>
                 </form>
-
                 
+                <div class="text-center mt-5 py-3 border-top">
+                    <p class="mb-2 text-muted fs-6">Don't have an account yet?</p>
+                    <a href="{{ route('register') }}" class="btn btn-outline-primary btn-sm px-4">
+                        Create a New Account
+                    </a>
+                </div>
+
 
             </div>
         </div>
