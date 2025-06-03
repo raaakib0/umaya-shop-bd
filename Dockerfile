@@ -26,8 +26,8 @@ COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 # Copy project files
 COPY . .
 
-# Install PHP dependencies
-RUN composer install --no-dev --optimize-autoloader
+# Install PHP dependencies INCLUDING dev dependencies to have Faker available during seed
+RUN composer install --optimize-autoloader
 
 # Set permissions
 RUN chown -R www-data:www-data /var/www \
@@ -36,5 +36,5 @@ RUN chown -R www-data:www-data /var/www \
 # Expose the port Render will bind to (Render injects the PORT env var)
 EXPOSE 8080
 
-# Run Laravel's built-in development server using the dynamic Render PORT
+# Run migrations, seed database, cache config, then serve app on Render's dynamic port
 CMD php artisan migrate --force && php artisan db:seed --force && php artisan config:cache && php artisan serve --host=0.0.0.0 --port=${PORT}
