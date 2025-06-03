@@ -16,8 +16,9 @@ RUN apt-get update && apt-get install -y \
     libonig-dev \
     libxml2-dev \
     libzip-dev \
+    libpq-dev \                # <-- Add this for PostgreSQL
     && docker-php-ext-configure zip \
-    && docker-php-ext-install pdo pdo_mysql mbstring zip exif pcntl
+    && docker-php-ext-install pdo pdo_pgsql mbstring zip exif pcntl
 
 # Install Composer globally
 COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
@@ -36,4 +37,5 @@ RUN chown -R www-data:www-data /var/www \
 EXPOSE 8080
 
 # Run Laravel's built-in development server using the dynamic Render PORT
-CMD php artisan config:cache && php artisan serve --host=0.0.0.0 --port=${PORT}
+CMD php artisan migrate --force && php artisan config:cache && php artisan serve --host=0.0.0.0 --port=${PORT}
+
