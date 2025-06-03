@@ -37,4 +37,4 @@ RUN chown -R www-data:www-data /var/www \
 EXPOSE 8080
 
 # Run Laravel's built-in development server using the dynamic Render PORT
-CMD php artisan migrate --force && php artisan config:cache && php artisan serve --host=0.0.0.0 --port=${PORT}
+CMD php artisan migrate --force && php artisan db:seed --force && php artisan config:cache && php artisan serve --host=0.0.0.0 --port=${PORT}
