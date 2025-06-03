@@ -16,7 +16,7 @@ RUN apt-get update && apt-get install -y \
     libonig-dev \
     libxml2-dev \
     libzip-dev \
-    libpq-dev \                # <-- Add this for PostgreSQL
+    libpq-dev \
     && docker-php-ext-configure zip \
     && docker-php-ext-install pdo pdo_pgsql mbstring zip exif pcntl
 
@@ -38,4 +38,3 @@ EXPOSE 8080
 
 # Run Laravel's built-in development server using the dynamic Render PORT
 CMD php artisan migrate --force && php artisan config:cache && php artisan serve --host=0.0.0.0 --port=${PORT}
-
