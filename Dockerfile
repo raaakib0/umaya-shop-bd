@@ -36,5 +36,12 @@ RUN chown -R www-data:www-data /var/www \
 # Expose the port Render will bind to (Render injects the PORT env var)
 EXPOSE 8080
 
-# Run migrations, seed database, cache config, then serve app on Render's dynamic port
-CMD php artisan migrate --force && php artisan db:seed --force && php artisan config:cache && php artisan serve --host=0.0.0.0 --port=${PORT}
+# Wait for PostgreSQL, migrate, seed, cache config, then run php-fpm (not artisan serve!)
+CMD bash -c " \
+  until php artisan migrate --force; do \
+    echo 'Waiting for PostgreSQL...'; \
+    sleep 3; \
+  done && \
+  php artisan db:seed --force && \
+  php artisan config:cache && \
+  php-fpm"
