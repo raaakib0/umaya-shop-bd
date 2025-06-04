@@ -3,7 +3,7 @@
 # Set default if not provided
 PORT=${PORT:-8080}
 
-# Replace port in nginx config (for Render)
+# Inject dynamic port into Nginx config
 sed -i "s/\${PORT}/$PORT/g" /etc/nginx/conf.d/default.conf
 
 # Run migrations and seeds

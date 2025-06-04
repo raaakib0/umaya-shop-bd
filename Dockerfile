@@ -1,7 +1,6 @@
-# Base PHP image
 FROM php:8.2-fpm
 
-# Install system dependencies
+# Install dependencies
 RUN apt-get update && apt-get install -y \
     nginx \
     git \
@@ -18,33 +17,30 @@ RUN apt-get update && apt-get install -y \
     && docker-php-ext-configure zip \
     && docker-php-ext-install pdo pdo_pgsql mbstring zip exif pcntl
 
-# Install Composer
-COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
-
 # Set working directory
 WORKDIR /var/www
 
-# Copy app files
+# Copy Composer from official image
+COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
+
+# Copy app code
 COPY . .
 
-# Copy nginx config
+# Install PHP dependencies
+RUN composer install --optimize-autoloader
+
+# Set permissions
+RUN chown -R www-data:www-data /var/www && chmod -R 755 /var/www/storage
+
+# Copy custom nginx config
 COPY nginx/default.conf /etc/nginx/conf.d/default.conf
 
 # Copy startup script
 COPY start.sh /start.sh
 RUN chmod +x /start.sh
 
-# Set permissions
-RUN chown -R www-data:www-data /var/www \
-    && chmod -R 755 /var/www/storage
+# Expose port for Render (dynamic port)
+EXPOSE 8080
 
-# Install PHP dependencies
-RUN composer install --optimize-autoloader
-
-# Expose dynamic port
-ARG PORT=8080
-ENV PORT=${PORT}
-EXPOSE ${PORT}
-
-# Run startup script
+# Start services
 CMD ["/start.sh"]
