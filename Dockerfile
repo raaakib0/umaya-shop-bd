@@ -1,11 +1,9 @@
-# Use official PHP image with required extensions
+# Base PHP image
 FROM php:8.2-fpm
-
-# Set working directory
-WORKDIR /var/www
 
 # Install system dependencies
 RUN apt-get update && apt-get install -y \
+    nginx \
     git \
     curl \
     zip \
@@ -20,28 +18,33 @@ RUN apt-get update && apt-get install -y \
     && docker-php-ext-configure zip \
     && docker-php-ext-install pdo pdo_pgsql mbstring zip exif pcntl
 
-# Install Composer globally
+# Install Composer
 COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 
-# Copy project files
+# Set working directory
+WORKDIR /var/www
+
+# Copy app files
 COPY . .
 
-# Install PHP dependencies INCLUDING dev dependencies to have Faker available during seed
-RUN composer install --optimize-autoloader
+# Copy nginx config
+COPY nginx/default.conf /etc/nginx/conf.d/default.conf
+
+# Copy startup script
+COPY start.sh /start.sh
+RUN chmod +x /start.sh
 
 # Set permissions
 RUN chown -R www-data:www-data /var/www \
     && chmod -R 755 /var/www/storage
 
-# Expose the port Render will bind to (Render injects the PORT env var)
-EXPOSE 8080
+# Install PHP dependencies
+RUN composer install --optimize-autoloader
 
-# Wait for PostgreSQL, migrate, seed, cache config, then run php-fpm (not artisan serve!)
-CMD bash -c " \
-  until php artisan migrate --force; do \
-    echo 'Waiting for PostgreSQL...'; \
-    sleep 3; \
-  done && \
-  php artisan db:seed --force && \
-  php artisan config:cache && \
-  php-fpm"
+# Expose dynamic port
+ARG PORT=8080
+ENV PORT=${PORT}
+EXPOSE ${PORT}
+
+# Run startup script
+CMD ["/start.sh"]

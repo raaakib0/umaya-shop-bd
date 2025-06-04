@@ -26,7 +26,9 @@ class DatabaseSeeder extends Seeder
                 'is_admin' => 1,
             ]
         );
-
+if (!class_exists(\Database\Seeders\ProductSeeder::class)) {
+    throw new \Exception('ProductSeeder class does not exist!');
+}
         $this->call([
             ProductSeeder::class,
         ]);
