@@ -6,7 +6,7 @@ use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
-
+use Illuminate\Support\Str;
 class DatabaseSeeder extends Seeder
 {
     /**
@@ -16,12 +16,16 @@ class DatabaseSeeder extends Seeder
     {
         // User::factory(10)->create();
 
-        User::factory()->create([
-            'name' => 'Rakibul Islam',
-            'email' => 'raaakib0@gmail.com',
-            'password' => Hash::make('rakib@123'),  // hash the password!
-            'is_admin' => 1,
-        ]);
+        User::updateOrCreate(
+            ['email' => 'raaakib0@gmail.com'],
+            [
+                'name' => 'Rakibul Islam',
+                'email_verified_at' => now(),
+                'password' => Hash::make('rakib@123'),
+                'remember_token' => Str::random(10),
+                'is_admin' => 1,
+            ]
+        );
 
         $this->call([
             ProductSeeder::class,
